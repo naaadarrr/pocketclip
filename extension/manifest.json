@@ -51,9 +51,6 @@
       "description": "__MSG_cmdCopy__"
     },
     "save": {
-      "suggested_key": {
-        "default": "Alt+Shift+S"
-      },
       "description": "__MSG_cmdSave__"
     }
   },
