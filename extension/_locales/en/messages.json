@@ -1,0 +1,68 @@
+{
+  "extName": {
+    "message": "Pocketclip"
+  },
+  "extDesc": {
+    "message": "Capture the viewport, a region, or the full page."
+  },
+  "cmdCaptureViewport": {
+    "message": "Capture visible area"
+  },
+  "cmdCaptureRegion": {
+    "message": "Capture selected region"
+  },
+  "cmdCaptureFull": {
+    "message": "Capture full page"
+  },
+  "cmdCopy": {
+    "message": "Copy screenshot"
+  },
+  "cmdSave": {
+    "message": "Save screenshot"
+  },
+  "btnViewport": {
+    "message": "Visible area"
+  },
+  "btnRegion": {
+    "message": "Region"
+  },
+  "btnFull": {
+    "message": "Full page"
+  },
+  "btnCopy": {
+    "message": "Copy"
+  },
+  "btnSave": {
+    "message": "Save"
+  },
+  "statusReady": {
+    "message": "Ready"
+  },
+  "statusWorking": {
+    "message": "Working"
+  },
+  "statusCaptured": {
+    "message": "Captured"
+  },
+  "statusCopied": {
+    "message": "Copied"
+  },
+  "statusSaved": {
+    "message": "Saved"
+  },
+  "statusError": {
+    "message": "Something went wrong"
+  },
+  "statusCancelled": {
+    "message": "Cancelled"
+  },
+  "previewAlt": {
+    "message": "Latest screenshot"
+  },
+  "regionHint": {
+    "message": "Drag to select. Esc to cancel."
+  },
+  "regionCancel": {
+    "message": "Cancel"
+  }
+}

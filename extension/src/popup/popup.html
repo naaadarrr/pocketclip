@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Pocketclip</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <header>
+      <h1 data-i18n="extName"></h1>
+    </header>
+    <section class="actions" aria-label="Capture">
+      <button type="button" data-action="capture-viewport" data-i18n="btnViewport"></button>
+      <button type="button" data-action="capture-region" data-i18n="btnRegion"></button>
+      <button type="button" data-action="capture-full" data-i18n="btnFull"></button>
+    </section>
+    <img id="preview" alt="" hidden />
+    <section class="actions" aria-label="Export">
+      <button type="button" data-action="copy" data-i18n="btnCopy"></button>
+      <button type="button" data-action="save" data-i18n="btnSave"></button>
+    </section>
+    <p id="status" role="status"></p>
+    <script src="popup.js"></script>
+  </body>
+</html>
