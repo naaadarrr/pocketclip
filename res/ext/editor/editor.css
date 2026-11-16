@@ -580,9 +580,9 @@ body.is-capturing .top-actions {
    Tool bottoms still clip on .draw-tool-btn — no clip-path here so the outer
    drop shadow can paint below the capsule. */
 .draw-toolbar-center {
-  border-radius: 999px;
+  border-radius: 18px;
   background:
-    linear-gradient(180deg, #3a3a3e 0%, #2f2f33 10%, #2a2a2e 28%, #252529 55%, #202024 80%, #1a1a1e 100%);
+    linear-gradient(180deg, #323236 0%, #252529 42%, #17171b 100%);
   -webkit-backdrop-filter: none;
   backdrop-filter: none;
   align-items: stretch;
@@ -965,13 +965,13 @@ body[data-theme="light"] .draw-toolbar-center {
 .size-chip { display: none; }
 
 .draw-icon-btn {
-  /* match .stroke-size-btn circular plate */
+  /* match stroke-size plates: rounded metal key, same 30px hit area */
   width: 30px;
   height: 30px;
   border: none;
-  border-radius: 50%;
+  border-radius: 8px;
   background: transparent;
-  color: rgba(244, 244, 245, 0.78);
+  color: #e8e6e1;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -979,18 +979,37 @@ body[data-theme="light"] .draw-toolbar-center {
   overflow: visible; /* allow [data-tooltip]::before above */
   transition: color .15s, background .12s, box-shadow .12s;
 }
+/* Opacity on the svg, not in the fill, so overlapping paths cannot stack alpha. */
+.draw-icon-btn svg {
+  opacity: 0.58;
+}
 .draw-icon-btn:hover {
-  background: rgba(255, 255, 255, 0.10);
-  color: #ffffff;
+  background:
+    linear-gradient(180deg, #3f3f44 0%, #2e2e32 100%);
+  color: #fff;
   box-shadow:
-    inset 0 1px 2px rgba(0, 0, 0, 0.28);
+    0 0 0 1px rgba(0, 0, 0, 0.35),
+    0 1px 1px rgba(0, 0, 0, 0.30),
+    inset 0 1px 0 rgba(255, 255, 255, 0.16);
+}
+.draw-icon-btn:hover svg,
+.draw-icon-btn:active svg {
+  opacity: 1;
+}
+.draw-icon-btn:active {
+  background: #1c1c20;
+  box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.50);
 }
 .draw-icon-btn:disabled,
 .draw-icon-btn:disabled:hover {
   background: transparent;
-  color: rgba(244, 244, 245, 0.28);
+  color: #e8e6e1;
   box-shadow: none;
   cursor: default;
+}
+.draw-icon-btn:disabled svg,
+.draw-icon-btn:disabled:hover svg {
+  opacity: 0.24;
 }
 
 .stroke-sizes {
