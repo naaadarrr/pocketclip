@@ -1,0 +1,50 @@
+# Local backups
+*.bak
+*.bak-*
+build.sh.bak*
+
+# Virtualenvs and Python leftovers
+.venv-ml/
+.venv/
+venv/
+.env/
+__pycache__/
+*.pyc
+*.pyo
+
+# Local screenshots and measurements
+shots/
+
+# Built app, packaging, Xcode
+Pocketclip.app
+build/
+dist/
+DerivedData/
+*.dmg
+xcuserdata/
+*.xcuserstate
+
+# macOS
+.DS_Store
+
+# Signing material and keys
+*.pem
+*.p12
+*.pfx
+*.key
+*.keychain
+*.keychain-db
+
+# Large optional model weights / packages (app builds without them)
+models/best.pt
+models/best.onnx
+models/*.mlpackage
+models/*.mlmodelc
+models/**/*.mlmodelc
+
+# Old prototype snapshot
+src/main-native-v1.swift.txt
+
+# Env files that may contain secrets
+.env
+.env.*

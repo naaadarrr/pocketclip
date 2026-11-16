@@ -1,0 +1,34 @@
+"menu.region" = "Capture Region";
+"menu.window" = "Capture Window";
+"menu.screen" = "Capture Full Screen";
+"menu.restart" = "Restart Pocketclip";
+"menu.quit" = "Quit Pocketclip";
+"perm.title" = "Screen Recording Permission Needed";
+"perm.body" = "Open System Settings → Privacy & Security → Screen & System Audio Recording and turn on Pocketclip (if an old Pocketclip entry is listed, select it and click − to remove it first).\n\nThen choose Pocketclip → “Restart Pocketclip” from the menu bar.";
+"perm.open" = "Open System Settings";
+"perm.later" = "Later";
+
+"menu.history" = "History…";
+"history.title" = "History";
+"history.copy" = "Copy";
+"history.copied" = "Copied";
+"history.open" = "Open";
+"history.reveal" = "Show in Finder";
+"history.delete" = "Delete";
+"history.clear" = "Clear All";
+"history.clear.confirm" = "Delete all screenshots in History?";
+"history.empty" = "No screenshots yet.\nCaptures (⌘⇧2 / ⌘⇧3 / ⌥⇧F) will appear here.";
+"history.count" = "%d items";
+"history.download" = "Download";
+"history.saved" = "Saved";
+"editor.history" = "History ⌘Y";
+"editor.history.empty" = "No screenshots in History yet";
+"editor.eyedropper" = "Eyedropper";
+"editor.back" = "Back";
+
+"region.tip" = "Click a block, or drag. Esc cancels.";
+"region.release" = "Release to capture";
+"region.tip.noax" = "Drag to capture. Esc cancels · Enable Accessibility for block snapping";
+"region.cancel" = "Cancel";
+
+"region.block" = "Block · %d×%d";

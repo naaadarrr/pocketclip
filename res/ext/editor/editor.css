@@ -1,0 +1,1452 @@
+@font-face {
+  font-family: "League Gothic";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("./fonts/LeagueGothic-latin.woff2") format("woff2");
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+html { background: transparent; }
+body {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: transparent;
+  color: #e8e6e3;
+  font-family: "PingFang SC", "Microsoft YaHei", system-ui, -apple-system, sans-serif;
+  overflow: hidden;
+  color-scheme: dark;
+  transition: background .2s, color .2s;
+}
+body[data-theme="light"] {
+  background: transparent;
+  color: #1c1917;
+  color-scheme: light;
+}
+
+.topbar {
+  position: relative;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  flex-shrink: 0;
+  pointer-events: none;
+  background: #000000;
+  border-radius: 0 0 14px 14px;
+  /* 1px solid warm metal lip at the bottom edge, plus a soft milled shade.
+     Midway between #5c5954 (invisible) and #a8a49c (too bright). */
+  box-shadow:
+    inset 0 -1px 0 #7a7670,
+    inset 0 -2px 3px rgba(255, 252, 248, 0.18);
+}
+body[data-theme="light"] .topbar {
+  background: #000000;
+}
+body[data-theme="light"] .meta {
+  color: #f4f4f5;
+}
+
+.topbar > * { pointer-events: auto; }
+.brand { display: flex; align-items: center; }
+.meta {
+  font-family: "League Gothic", Impact, "Arial Narrow", sans-serif;
+  font-size: 26px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  color: #f4f4f5;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 52vw;
+  text-shadow: none;
+}
+.meta-size { color: inherit; }
+.meta-dpr {
+  font-family: "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: rgba(244, 244, 245, 0.45);
+  margin-left: 2px;
+  vertical-align: middle;
+}
+.top-clear {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  gap: 0;
+  margin: 0;
+  padding: 5px;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: rgba(244, 244, 245, 0.72);
+  cursor: pointer;
+  transition: color .15s, opacity .15s, transform .12s;
+}
+.top-clear[hidden] { display: none !important; }
+.top-clear:hover {
+  color: #fff;
+  background: transparent;
+}
+.top-clear:active { transform: translateY(1px); }
+.top-clear__icon { flex-shrink: 0; opacity: 1; display: block; width: 14px; height: 14px; }
+.top-clear__label { display: none; }
+
+.top-actions {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0;
+  border-radius: 0;
+  background: none;
+}
+.top-btn {
+  width: auto;
+  min-width: 0;
+  min-height: 32px;
+  height: 32px;
+  padding: 0 12px;
+  border: none;
+  border-radius: 8px;
+  background:
+    linear-gradient(180deg, #303034 0%, #2c2c30 45%, #2a2a2e 100%);
+  color: #ffffff;
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-family: "League Gothic", Impact, "Arial Narrow", sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  text-transform: none;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    inset 0 1px 2px rgba(0, 0, 0, 0.22),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.28);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  transition: background .12s, color .12s, box-shadow .12s, opacity .15s;
+}
+.top-btn__icon {
+  flex-shrink: 0;
+  width: 14px;
+  height: 14px;
+  opacity: 1;
+  color: inherit;
+  stroke: currentColor;
+}
+.top-btn__icon--fill {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+  stroke: none;
+}
+.top-btn__label {
+  display: block;
+  white-space: nowrap;
+}
+.top-btn:hover {
+  background:
+    linear-gradient(180deg, #38383c 0%, #323236 45%, #303034 100%);
+  color: #fff;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.26),
+    inset 0 1px 2px rgba(0, 0, 0, 0.18),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.26);
+}
+.top-btn:active {
+  transform: none;
+  background:
+    linear-gradient(180deg, #26262a 0%, #2a2a2e 55%, #2e2e32 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.14),
+    inset 0 2px 4px rgba(0, 0, 0, 0.4),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.32);
+}
+.top-btn--primary {
+  width: auto;
+  min-width: 0;
+  flex-direction: row;
+  gap: 7px;
+  padding: 0 16px;
+  border-radius: 10px;
+  /* same soft recessed fill + top highlight as .top-btn */
+  background:
+    linear-gradient(180deg, #303034 0%, #2c2c30 45%, #2a2a2e 100%);
+  color: #ffffff;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    inset 0 1px 2px rgba(0, 0, 0, 0.22),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.28);
+}
+.top-btn--primary:hover {
+  background:
+    linear-gradient(180deg, #38383c 0%, #323236 45%, #303034 100%);
+  color: #fff;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.26),
+    inset 0 1px 2px rgba(0, 0, 0, 0.18),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.26);
+}
+.top-btn--primary:active {
+  transform: none;
+  background:
+    linear-gradient(180deg, #26262a 0%, #2a2a2e 55%, #2e2e32 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.14),
+    inset 0 2px 4px rgba(0, 0, 0, 0.4),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.32);
+}
+.top-btn.is-copied {
+  /* keep recessed look; Copy feedback only */
+  color: #fff;
+}
+.top-btn.is-error {
+  color: #fecaca;
+}
+body[data-theme="light"] .top-actions {
+  background: none;
+}
+body[data-theme="light"] .top-btn {
+  background: #333333;
+  color: rgba(243, 242, 240, 0.92);
+}
+body[data-theme="light"] .top-btn--primary,
+body[data-theme="light"] .top-btn.is-copied {
+  background: #333333;
+  color: rgba(243, 242, 240, 0.92);
+}
+
+/* tip: custom hover labels use ::before */
+[data-tooltip] {
+  position: relative;
+  z-index: 1;
+}
+[data-tooltip]:hover,
+[data-tooltip]:focus-visible {
+  /* lift host so ::before escapes sibling stacking */
+  z-index: 10000;
+}
+[data-tooltip]::before {
+  content: attr(data-tooltip);
+  position: absolute;
+  left: 50%;
+  transform: translateX(calc(-50% + var(--tip-dx, 0px))) translateY(4px) scale(0.95);
+  transform-origin: center bottom;
+  max-width: 280px;
+  width: max-content;
+  padding: 4px 6px;
+  border-radius: 6px;
+  background: #09090b;
+  color: #f4f4f5;
+  font-family: "PingFang SC", "Microsoft YaHei", system-ui, -apple-system, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.25;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .1s ease, transform .1s ease, visibility .1s;
+  border: 1px solid #3f3f46;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  z-index: 10000;
+}
+[data-tooltip][data-tip="bottom"]::before {
+  top: calc(100% + 4px);
+  bottom: auto;
+  transform-origin: center top;
+  transform: translateX(calc(-50% + var(--tip-dx, 0px))) translateY(-4px) scale(0.95);
+}
+[data-tooltip][data-tip="top"]::before,
+[data-tooltip]:not([data-tip])::before {
+  bottom: calc(100% + var(--art-rise, 0px) + var(--tip-gap, 4px));
+  top: auto;
+  transform-origin: center bottom;
+  transform: translateX(calc(-50% + var(--tip-dx, 0px))) translateY(4px) scale(0.95);
+}
+[data-tooltip]:hover::before,
+[data-tooltip]:focus-visible::before {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(calc(-50% + var(--tip-dx, 0px))) translateY(0) scale(1);
+}
+/* kbd tips: label + keycap (no middle ·) */
+[data-tooltip][data-kbd]::before {
+  content: none !important;
+  display: none !important;
+}
+.ui-tip {
+  position: absolute;
+  left: 50%;
+  /* clear the host's raised artwork (pen/eraser lift above the dock), then a small gap */
+  bottom: calc(100% + var(--art-rise, 0px) + var(--tip-gap, 4px));
+  top: auto;
+  transform: translateX(calc(-50% + var(--tip-dx, 0px))) translateY(4px) scale(0.95);
+  transform-origin: center bottom;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  max-width: 280px;
+  width: max-content;
+  padding: 4px 6px;
+  border-radius: 6px;
+  background: #09090b;
+  color: #f4f4f5;
+  font-family: "PingFang SC", "Microsoft YaHei", system-ui, -apple-system, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.25;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .1s ease, transform .1s ease, visibility .1s;
+  border: 1px solid #3f3f46;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  z-index: 10000;
+}
+.ui-tip__kbd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 16px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 4px;
+  background: #27272a;
+  border: 1px solid #3f3f46;
+  color: #f4f4f5;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1;
+  box-shadow: none;
+}
+[data-kbd]:hover,
+[data-kbd]:focus-visible {
+  z-index: 10001;
+}
+[data-kbd]:hover .ui-tip,
+[data-kbd]:focus-visible .ui-tip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(calc(-50% + var(--tip-dx, 0px))) translateY(0) scale(1);
+}
+/* flipped below the host when there is no room above (set by editor.js fitTip) */
+[data-tooltip].tip-below::before,
+.tip-below > .ui-tip {
+  top: calc(100% + 4px);
+  bottom: auto;
+  transform-origin: center top;
+}
+/* /tip */
+
+/* success state: label + icon swap only — no color chrome */
+.top-btn.is-error {
+  color: #fecaca;
+}
+.pill { border-radius: 999px; }
+
+#stage-wrap {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  display: flex;
+  /* start edges always reachable when zoomed; letterbox/pillarbox centered via #stage auto margins */
+  justify-content: flex-start;
+  align-items: flex-start;
+  --gap: 28px;
+  --dock-h: 52px; /* match top bar (Swift shim + DragWebView.barH = 52) */
+  --dock-pad: 10px; /* .draw-toolbar padding-bottom */
+  padding: var(--gap) var(--gap) calc(var(--gap) + var(--dock-h) + var(--dock-pad));
+  background: transparent;
+  transition: background-color .2s;
+}
+body[data-theme="light"] #stage-wrap {
+  background: transparent;
+}
+body[data-theme="light"] #stage {
+  box-shadow: none;
+  border-color: rgba(0,0,0,.08);
+}
+
+/* Solid themed fill when macOS Reduce Transparency is on (native vibrancy is disabled). */
+html.pc-reduce-transparency body,
+body.pc-reduce-transparency {
+  background: #121314;
+}
+html.pc-reduce-transparency body[data-theme="light"],
+body.pc-reduce-transparency[data-theme="light"] {
+  background: #eceae6;
+}
+html.pc-reduce-transparency #stage-wrap,
+body.pc-reduce-transparency #stage-wrap {
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,.08) 0.6px, transparent 0.7px);
+  background-size: 10px 10px;
+  background-color: #121314;
+}
+html.pc-reduce-transparency body[data-theme="light"] #stage-wrap,
+body.pc-reduce-transparency[data-theme="light"] #stage-wrap {
+  background-image:
+    radial-gradient(circle, rgba(28,25,23,.14) 0.6px, transparent 0.7px);
+  background-color: #eceae6;
+}
+@media (prefers-reduced-transparency: reduce) {
+  body { background: #121314; }
+  body[data-theme="light"] { background: #eceae6; }
+  #stage-wrap {
+    background-image:
+      radial-gradient(circle, rgba(255,255,255,.08) 0.6px, transparent 0.7px);
+    background-size: 10px 10px;
+    background-color: #121314;
+  }
+  body[data-theme="light"] #stage-wrap {
+    background-image:
+      radial-gradient(circle, rgba(28,25,23,.14) 0.6px, transparent 0.7px);
+    background-color: #eceae6;
+  }
+}
+#stage {
+  position: relative;
+  line-height: 0;
+  /* center when the shot is smaller than the wrap; overflow scroll still starts at left */
+  margin: auto;
+  box-shadow: none;
+  border-radius: 0;
+  overflow: hidden;
+  background: #1a1b1d;
+  border: 1px solid rgba(255,255,255,.06);
+  /* NEVER default to invisible — a missed is-ready left size+shot blank */
+  opacity: 1;
+  transform: none;
+}
+.capture-pulse {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  z-index: 300;
+  pointer-events: none;
+  overflow: hidden;
+  background: transparent;
+}
+.capture-pulse:not([hidden]) {
+  display: block;
+}
+.capture-pulse::after {
+  content: "";
+  display: block;
+  height: 100%;
+  width: 40%;
+  background: linear-gradient(90deg, transparent, #FF8A4C, transparent);
+  animation: capture-pulse-run 0.7s linear infinite;
+}
+@keyframes capture-pulse-run {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(350%); }
+}
+body.is-capturing #dock-wrap,
+body.is-capturing .top-actions {
+  opacity: 0.55;
+  pointer-events: none;
+  transition: opacity 120ms ease;
+}
+#canvas {
+  display: block;
+  position: relative;
+  z-index: 0;
+  max-width: none;
+  cursor: crosshair;
+  background: #1a1b1d;
+  pointer-events: none;
+}
+#draw {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  display: block;
+  cursor: crosshair;
+  pointer-events: auto;
+  background: transparent;
+}
+#draw.cursor-pen,
+#draw.cursor-eraser {
+  /* sticker cursors applied via canvas.style.cursor (lele data-URL) */
+}
+
+#draw.cursor-text {
+  cursor: none;
+}
+#draw.cursor-arrow {
+  cursor: crosshair;
+}
+.text-cursor-pill {
+  position: fixed;
+  z-index: 95;
+  left: 0;
+  top: 0;
+  display: none;
+  align-items: center;
+  gap: 2px;
+  pointer-events: none;
+  padding: 2px 6px 2px 7px;
+  border-radius: 999px;
+  background: #ee935d;
+  color: #ffffff;
+  font-family: "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+  white-space: nowrap;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.22);
+  transform: translate(10px, 12px);
+  will-change: transform, left, top;
+}
+.text-cursor-pill.is-on {
+  display: inline-flex;
+}
+.text-cursor-pill__caret {
+  display: inline-block;
+  width: 1.5px;
+  height: 0.95em;
+  margin-left: 1px;
+  border-radius: 1px;
+  background: rgba(255, 255, 255, 0.95);
+  animation: text-cursor-blink 1.05s steps(1, end) infinite;
+  flex-shrink: 0;
+}
+@keyframes text-cursor-blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+#crop-box {
+  position: absolute;
+  border: 2px dashed #3b82f6;
+  background: rgba(59,130,246,.12);
+  box-shadow: 0 0 0 9999px rgba(0,0,0,.55);
+  pointer-events: none;
+}
+
+.draw-toolbar {
+  z-index: 70;
+  pointer-events: none;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 10px;
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.draw-toolbar > * { pointer-events: auto; }
+.draw-toolbar-group { display: flex; flex-direction: column; gap: 8px; }
+.draw-toolbar-row1 { display: flex; justify-content: center; align-items: flex-end; gap: 12px; }
+
+
+/* Dark gunmetal / graphite tray — same dark-chrome family as the #000 top bar,
+   a touch lighter so the floating capsule still reads as a metal tray.
+   Previous light silver (revert if this trial is rejected):
+   background: linear-gradient(180deg, #e2e2e2 0%, #d4d4d4 10%, #cdcdcd 28%, #c8c8c8 55%, #c4c4c4 80%, #bebebe 100%);
+   box-shadow: 0 0 0 1px rgba(0,0,0,.20), 0 6px 18px rgba(0,0,0,.34), 0 1px 3px rgba(0,0,0,.18),
+               inset 0 1px 0 rgba(255,255,255,.65), inset 0 -1px 0 rgba(0,0,0,.12);
+   light-theme shadows: 0 0 0 1px rgba(0,0,0,.16), 0 5px 16px rgba(0,0,0,.16), 0 1px 3px rgba(0,0,0,.10),
+               inset 0 1px 0 rgba(255,255,255,.65), inset 0 -1px 0 rgba(0,0,0,.12);
+   Tool bottoms still clip on .draw-tool-btn — no clip-path here so the outer
+   drop shadow can paint below the capsule. */
+.draw-toolbar-center {
+  border-radius: 999px;
+  background:
+    linear-gradient(180deg, #3a3a3e 0%, #2f2f33 10%, #2a2a2e 28%, #252529 55%, #202024 80%, #1a1a1e 100%);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  align-items: stretch;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: max-content;
+  max-width: calc(100vw - 24px);
+  height: 52px;
+  gap: 0;
+  padding: 0 0 0 12px;
+  overflow: visible;
+  /* Dark rim + drop shadow; milled top lip; slightly darker foot.
+     The dark-dock trial used inset 0 1px 0 rgba(255,255,255,0.22), which vanished
+     on the already-light #3a3a3e gradient cap. Earlier dark trays used a solid
+     (no-alpha) lip, inset 0 1px 0 #6e6c68 on #333. Restore that language here:
+     an opaque warm metal hairline plus a soft 2px milled shade (same idea as
+     the top bar), retuned for #3a3a3e. Not a bright white stroke. */
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.55),
+    0 6px 18px rgba(0, 0, 0, 0.48),
+    0 1px 3px rgba(0, 0, 0, 0.32),
+    inset 0 1px 0 #75736c,
+    inset 0 2px 3px rgba(255, 252, 248, 0.10),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.50);
+}
+body[data-theme="light"] .draw-toolbar-center {
+  /* same dark sheet; slightly softer outer shadow on a light canvas */
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.40),
+    0 5px 16px rgba(0, 0, 0, 0.28),
+    0 1px 3px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 #75736c,
+    inset 0 2px 3px rgba(255, 252, 248, 0.10),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.50);
+}
+
+.draw-tools-container {
+  border-right: none;
+  align-items: flex-end;
+  align-self: stretch;
+  gap: 12px;
+  height: 52px;
+  min-height: 52px;
+  padding: 0 14px 0 8px;
+  margin-right: 2px;
+  display: flex;
+  position: relative;
+  overflow: visible;
+}
+/* Incised metal seam: 1px dark groove, 1px light highlight to the right. */
+.draw-tools-container::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 10px;
+  bottom: 10px;
+  width: 1px;
+  border-radius: 0;
+  pointer-events: none;
+  /* Incised seam retuned for dark metal: deeper groove + quieter highlight. */
+  background: rgba(0, 0, 0, 0.55);
+  box-shadow: 1px 0 0 rgba(255, 255, 255, 0.16);
+}
+
+.draw-tool-btn {
+  /* Allow icon + hover tip to extend above/beside the tray; clip below only */
+  clip-path: inset(-200px -200px 0);
+  width: 56px;
+  height: 52px;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  transition: all .2s;
+  position: relative;
+  display: block;
+  flex-shrink: 0;
+  overflow: visible;
+  --tip-gap: 7px; /* gap above the icon top in its current state (resting or raised) */
+}
+.draw-tool-btn[hidden] {
+  display: none !important;
+}
+.draw-tool-btn:hover { background: transparent; }
+.draw-tool-btn.active { border: none; background: transparent; }
+
+.draw-tool-icon {
+  width: 52px;
+  min-width: 52px;
+  height: auto;
+  max-width: 52px;
+  object-fit: contain;
+  object-position: bottom center;
+  /* thin light hairline so a dark --pen body still separates from the tray */
+  filter: drop-shadow(0 0 0.5px rgba(255, 255, 255, 0.40)) drop-shadow(0 1px 1.5px rgba(0, 0, 0, 0.45));
+  transition: bottom .2s, filter .2s, transform .15s;
+  position: absolute;
+  left: 0;
+  /* unselected: sunk into tray */
+  bottom: -24px;
+  pointer-events: none;
+  -webkit-user-drag: none;
+  z-index: 1;
+}
+.draw-tool-btn:hover .draw-tool-icon {
+  filter: drop-shadow(0 0 0.5px rgba(255, 255, 255, 0.40)) drop-shadow(0 1px 1.5px rgba(0, 0, 0, 0.45));
+  transform: translateY(-2px);
+}
+.draw-tool-icon--selected,
+.draw-tool-btn.active .draw-tool-icon {
+  /* selected: lift via bottom, not underdash */
+  bottom: 12px;
+  filter: drop-shadow(0 0 0.5px rgba(255, 255, 255, 0.40)) drop-shadow(0 1px 1.5px rgba(0, 0, 0, 0.45));
+  transform: none;
+}
+.draw-tool-btn.active:hover .draw-tool-icon,
+.draw-tool-btn:hover .draw-tool-icon--selected {
+  filter: drop-shadow(0 0 0.5px rgba(255, 255, 255, 0.40)) drop-shadow(0 1px 1.5px rgba(0, 0, 0, 0.45));
+  transform: none;
+}
+/* eraser — wider + shorter; selected lifts above dock */
+.draw-tool-btn[data-tool="eraser"] {
+  width: 56px;
+  height: 52px;
+}
+.draw-tool-btn[data-tool="eraser"] .draw-tool-icon {
+  bottom: -16px;
+  width: 48px;
+  min-width: 48px;
+  max-width: 48px;
+  height: 56px;
+  max-height: 56px;
+  object-fit: contain;
+  object-position: bottom center;
+}
+.draw-tool-btn[data-tool="eraser"] .draw-tool-icon--selected,
+.draw-tool-btn[data-tool="eraser"].active .draw-tool-icon {
+  bottom: 10px;
+}
+
+/* pen — lele slot ~36; selected peek ~16px above 52px dock */
+.draw-tool-btn[data-tool="pen"] {
+  width: 36px;
+  height: 52px;
+}
+.draw-tool-btn[data-tool="pen"] .draw-tool-icon,
+.draw-tool-btn[data-tool="pen"] .pen-icon {
+  width: 36px;
+  min-width: 36px;
+  max-width: 36px;
+  height: 58px;
+  max-height: 58px;
+  object-fit: contain;
+  object-position: bottom center;
+  bottom: -10px; /* unselected: tip at/under dock top */
+}
+.draw-tool-btn[data-tool="pen"] .draw-tool-icon--selected,
+.draw-tool-btn[data-tool="pen"].active .draw-tool-icon,
+.draw-tool-btn[data-tool="pen"].active .pen-icon,
+.draw-tool-btn[data-tool="pen"] .pen-icon.draw-tool-icon--selected {
+  bottom: 10px; /* peek ≈ 10+58-52 = 16px */
+}
+
+
+
+.draw-colors-section {
+  align-self: stretch; /* fill dock height so right divider can match */
+  align-items: center;
+  gap: 10px;
+  padding: 0 0 0 10px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+/* color strip as capsule */
+.draw-color-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.draw-color-palette {
+  border-radius: 999px;
+  align-items: center;
+  display: flex;
+  position: relative;
+  overflow: visible;
+  box-sizing: border-box;
+  height: 52px;
+  gap: 1px;
+  padding: 4px 4px;
+  background: transparent;
+  box-shadow: none;
+}
+.draw-color-palette:after {
+  content: none;
+}
+.draw-color-btn {
+  /* idle: 22px enamel sits flat in a 32px circular well (same tokens as .stroke-sizes).
+     selected: same 22px size; hollow raised metal bezel in the well gap (stroke-chip tokens).
+     No filled gray disc, scale, white outline, or check. ::before is reserved for [data-tooltip]. */
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 50%;
+  background: #16161a;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  transform: none;
+  outline: none;
+  box-shadow:
+    inset 0 1px 2px rgba(0, 0, 0, 0.55),
+    0 0 0 1px rgba(0, 0, 0, 0.40);
+  overflow: visible;
+  transition: filter .12s, background .12s, box-shadow .12s;
+}
+.draw-color-plate {
+  /* Hollow raised metal bezel, same tokens as .stroke-size-btn.active.
+     30px outer, 2px metal, 2px #16161a well gap around the 22px enamel (29–30px
+     occupied, inside the 32px well). Center is transparent — not a filled disc. */
+  display: none;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 30px;
+  height: 30px;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle,
+    transparent calc(50% - 2px),
+    #3a3a3e calc(50% - 2px));
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.35),
+    0 1px 2px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.16);
+  pointer-events: none;
+  z-index: 0;
+}
+.draw-color-btn.active .draw-color-plate {
+  display: block;
+}
+.draw-color-btn::after {
+  /* flat swatch disc of --swatch; soft bottom volume only, no highlight / rim */
+  content: "";
+  position: relative;
+  z-index: 1;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background:
+    linear-gradient(180deg,
+      var(--swatch) 0%,
+      var(--swatch) 46%,
+      color-mix(in srgb, var(--swatch) 84%, black) 100%);
+  display: block;
+  flex-shrink: 0;
+  box-shadow:
+    inset 0 -1.5px 2px rgba(0, 0, 0, 0.14);
+  pointer-events: none;
+  transition: box-shadow .12s;
+}
+.draw-color-btn:hover { filter: brightness(1.08); }
+.draw-color-btn:hover::after {
+  box-shadow:
+    inset 0 -1.5px 2px rgba(0, 0, 0, 0.12);
+}
+.draw-color-btn.active {
+  /* well depth/color stay idle; selected language is the hollow metal bezel */
+  z-index: 2;
+  transform: none;
+}
+.draw-color-btn.active:hover {
+  filter: brightness(1.05);
+  transform: none;
+}
+/* color tooltips: keep above palette neighbors */
+.draw-color-btn[data-tooltip]:hover,
+.draw-color-btn[data-tooltip]:focus-visible {
+  z-index: 10001;
+}
+.stroke-size-btn[data-tooltip]:hover,
+.stroke-size-btn[data-tooltip]:focus-visible,
+.draw-icon-btn[data-tooltip]:hover,
+.draw-icon-btn[data-tooltip]:focus-visible {
+  z-index: 10001;
+}
+
+.draw-color-more {
+  width: 22px;
+  height: 26px;
+  margin: 0 2px 0 4px;
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  flex-shrink: 0;
+}
+.draw-color-more__dots,
+.draw-color-more__dots::before,
+.draw-color-more__dots::after {
+  content: "";
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: rgba(244, 244, 245, 0.50);
+  display: block;
+}
+.draw-color-more__dots {
+  position: relative;
+}
+.draw-color-more__dots::before {
+  position: absolute;
+  left: 0;
+  top: -5px;
+}
+.draw-color-more__dots::after {
+  position: absolute;
+  left: 0;
+  top: 5px;
+}
+.draw-color-more:hover .draw-color-more__dots,
+.draw-color-more:hover .draw-color-more__dots::before,
+.draw-color-more:hover .draw-color-more__dots::after,
+.draw-color-more[aria-expanded="true"] .draw-color-more__dots,
+.draw-color-more[aria-expanded="true"] .draw-color-more__dots::before,
+.draw-color-more[aria-expanded="true"] .draw-color-more__dots::after {
+  background: rgba(255, 255, 255, 0.92);
+}
+.draw-color-more-panel {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 10px);
+  transform: translateX(-50%);
+  display: flex;
+  gap: 4px;
+  padding: 6px;
+  border-radius: 999px;
+  background:
+    linear-gradient(180deg, #3a3a3e 0%, #1e1e22 100%);
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.50),
+    0 6px 16px rgba(0, 0, 0, 0.40);
+  z-index: 90;
+}
+.draw-color-more-panel[hidden] { display: none !important; }
+.draw-color-more-panel .draw-color-btn {
+  width: 24px;
+  height: 24px;
+}
+.draw-color-more-panel .draw-color-btn::after {
+  width: 16.5px;
+  height: 16.5px;
+}
+.draw-color-more-panel .draw-color-plate {
+  /* scaled for 16.5px enamel in a 24px well: 22.5px outer, 1.5px metal, 1.5px gap */
+  width: 22.5px;
+  height: 22.5px;
+  background: radial-gradient(circle,
+    transparent calc(50% - 1.5px),
+    #3a3a3e calc(50% - 1.5px));
+}
+
+
+.size-chip { display: none; }
+
+.draw-icon-btn {
+  /* match .stroke-size-btn circular plate */
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: rgba(244, 244, 245, 0.78);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  overflow: visible; /* allow [data-tooltip]::before above */
+  transition: color .15s, background .12s, box-shadow .12s;
+}
+.draw-icon-btn:hover {
+  background: rgba(255, 255, 255, 0.10);
+  color: #ffffff;
+  box-shadow:
+    inset 0 1px 2px rgba(0, 0, 0, 0.28);
+}
+.draw-icon-btn:disabled,
+.draw-icon-btn:disabled:hover {
+  background: transparent;
+  color: rgba(244, 244, 245, 0.28);
+  box-shadow: none;
+  cursor: default;
+}
+
+.stroke-sizes {
+  display: flex;
+  align-items: center;
+  align-self: center; /* shorter than 52px dock */
+  gap: 0;
+  box-sizing: border-box;
+  height: 32px;
+  padding: 2px;
+  border-radius: 8px; /* concentric with the 6px plate + 2px padding (was a full pill) */
+  background: #16161a;
+  box-shadow:
+    inset 0 1px 2px rgba(0, 0, 0, 0.55),
+    0 0 0 1px rgba(0, 0, 0, 0.40);
+  overflow: visible;
+}
+.stroke-size-btn {
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 6px; /* rounded-rect plate; same 6px radius as hover tips / clear button */
+  background: transparent;
+  color: rgba(244, 244, 245, 0.72);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  overflow: visible; /* allow Thin/Medium/Thick tooltips */
+  transition: color .12s, background .12s, box-shadow .12s;
+}
+.stroke-size-btn:hover {
+  color: #ffffff;
+  background: transparent;
+}
+.stroke-size-btn.active {
+  /* raised dark-chrome plate, a step lighter than the well */
+  background: #3a3a3e;
+  color: #ffffff;
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.35),
+    0 1px 2px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.16);
+}
+.stroke-size-btn.active svg {
+  filter: none;
+}
+
+.history-btns {
+  display: flex;
+  align-items: center;
+  align-self: stretch;
+  gap: 6px;
+  padding: 0 12px 0 12px;
+  border-left: none;
+  margin-left: 10px;
+  position: relative;
+  height: 100%;
+  min-height: 100%;
+  box-sizing: border-box;
+}
+.history-btns::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 10px;
+  bottom: 10px;
+  height: auto;
+  width: 1px;
+  border-radius: 0;
+  pointer-events: none;
+  background: rgba(0, 0, 0, 0.55);
+  box-shadow: 1px 0 0 rgba(255, 255, 255, 0.16);
+}
+
+.toast {
+  position: fixed;
+  top: 64px;
+  bottom: auto;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 5px 10px;
+  background: rgba(12,12,14,.96);
+  color: #f3f2f0;
+  border-radius: 6px;
+  font-size: 12px;
+  line-height: 1.2;
+  box-shadow: none;
+  border: 1px solid rgba(255,255,255,.18);
+  z-index: 120;
+}
+.toast.ok { border-color: rgba(255,255,255,.18); }
+.toast.err { border-color: rgba(255,255,255,.18); }
+
+.stroke-size-btn svg {
+  display: block;
+  overflow: visible;
+}
+
+.on-canvas-text-wrap {
+  position: absolute;
+  z-index: 40;
+  display: inline-block;
+  max-width: min(60vw, 480px);
+  padding: 10px;
+  margin: -10px;
+  pointer-events: auto;
+  cursor: move;
+  border: 1px dashed rgba(96, 165, 250, 0.85);
+  border-radius: 4px;
+  background: transparent;
+  box-sizing: content-box;
+}
+.on-canvas-text-wrap.is-dragging {
+  border-color: rgba(147, 197, 253, 1);
+  cursor: grabbing;
+}
+.on-canvas-text {
+  position: relative;
+  display: block;
+  min-width: 8ch;
+  min-height: 1.25em;
+  max-width: min(60vw, 480px);
+  margin: 0;
+  padding: 2px 4px;
+  border: none;
+  outline: none;
+  background: rgba(0, 0, 0, 0.18);
+  resize: none;
+  overflow: hidden;
+  font-weight: 600;
+  font-family: "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  line-height: 1.25;
+  white-space: pre;
+  box-shadow: none;
+  pointer-events: auto;
+  cursor: text;
+}
+.on-canvas-text__handle {
+  position: absolute;
+  right: 6px;
+  bottom: 6px;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  background: #f4f4f5;
+  border: 1px solid #3f3f46;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+  cursor: nwse-resize;
+  opacity: 1;
+  pointer-events: auto;
+  z-index: 2;
+}
+.on-canvas-text-wrap.is-scaling .on-canvas-text {
+  outline-color: rgba(244, 244, 245, 0.7);
+}
+.on-canvas-text::placeholder {
+  color: rgba(244, 244, 245, 0.55);
+}
+
+
+.draw-color-wrap { position: relative; display: flex; align-items: center; }
+.draw-color-btn--custom {
+  padding: 0;
+}
+.draw-color-btn--custom::after {
+  background:
+    conic-gradient(#f00, #ff0, #0f0, #0ff, #00f, #f0f, #f00) !important;
+}
+.draw-color-btn--custom .draw-color-custom-ring {
+  display: none;
+}
+.color-picker-pop {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 188px;
+  padding: 10px;
+  border-radius: 12px;
+  background: #fff;
+  border: 1px solid #e8e6e3;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.24);
+  z-index: 200;
+  color: #1c1917;
+  transform: none;
+  overflow: visible;
+  max-height: none;
+}
+.color-picker-pop[hidden] { display: none !important; }
+.cp-sv {
+  position: relative;
+  width: 168px;
+  height: 108px;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: crosshair;
+  touch-action: none;
+}
+.cp-sv canvas { display: block; width: 100%; height: 100%; }
+.cp-sv-knob {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  margin: -7px 0 0 -7px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  box-shadow: none;
+  outline: 1px solid rgba(0,0,0,.25);
+  pointer-events: none;
+  background: transparent;
+}
+.cp-hue {
+  position: relative;
+  margin-top: 10px;
+  margin-bottom: 4px;
+  width: 168px;
+  height: 12px;
+  border-radius: 999px;
+  overflow: visible; /* let white ring stick out past the strip */
+  cursor: pointer;
+  touch-action: none;
+}
+.cp-hue canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 999px;
+  overflow: hidden;
+}
+.cp-hue-knob {
+  position: absolute;
+  top: 50%;
+  width: 18px;
+  height: 18px;
+  margin: -9px 0 0 -9px;
+  border-radius: 50%;
+  border: 2.5px solid #fff;
+  outline: none;
+  background: transparent;
+  pointer-events: none;
+  box-shadow: 0 0 0 1px rgba(0,0,0,.35), 0 1px 2px rgba(0,0,0,.2);
+  box-sizing: border-box;
+}
+.cp-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+.cp-preview {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1px solid rgba(0,0,0,.08);
+  flex-shrink: 0;
+  background: #262523;
+}
+.cp-hex {
+  flex: 1;
+  min-width: 0;
+  height: 28px;
+  padding: 0 12px;
+  border: none;
+  border-radius: 10px;
+  background: #f3f2f0;
+  color: #1c1917;
+  font-size: 12px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: 0.02em;
+  outline: none;
+  box-shadow: none;
+}
+.cp-hex:focus { outline: 1px solid rgba(0,0,0,.15); }
+
+
+.on-canvas-label {
+  position: absolute;
+  z-index: 41;
+  margin: 0;
+  padding: 2px 10px 10px 4px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background: transparent;
+  font-weight: 600;
+  font-family: "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  line-height: 1.25;
+  white-space: pre;
+  cursor: move;
+  user-select: none;
+  -webkit-user-select: none;
+  pointer-events: auto;
+  outline: none;
+}
+.on-canvas-label__text {
+  display: inline-block;
+}
+.on-canvas-label__handle {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  background: #f4f4f5;
+  border: 1px solid #3f3f46;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+  cursor: nwse-resize;
+  opacity: 0;
+  pointer-events: auto;
+}
+.on-canvas-label:hover .on-canvas-label__handle,
+.on-canvas-label:focus-visible .on-canvas-label__handle,
+.on-canvas-label.is-scaling .on-canvas-label__handle,
+.on-canvas-label.is-dragging .on-canvas-label__handle {
+  opacity: 1;
+}
+.on-canvas-label:hover,
+.on-canvas-label:focus-visible {
+  border-color: rgba(244, 244, 245, 0.35);
+  background: rgba(0, 0, 0, 0.12);
+}
+.on-canvas-label.is-dragging,
+.on-canvas-label.is-scaling {
+  border-color: rgba(244, 244, 245, 0.55);
+  background: rgba(0, 0, 0, 0.18);
+  opacity: 0.95;
+}
+
+
+/* Pen body fills follow --pen; size/peek owned by [data-tool=pen] block above (1.10.64). */
+.pen-icon {
+  --pen: #262523;
+  overflow: visible;
+}
+.pen-icon .pen-body--base { fill: var(--pen); }
+.pen-icon .pen-body--l1 { fill: color-mix(in srgb, var(--pen) 78%, white); }
+.pen-icon .pen-body--l2 { fill: color-mix(in srgb, var(--pen) 55%, white); }
+.pen-icon .pen-body--d1 { fill: color-mix(in srgb, var(--pen) 72%, black); }
+.pen-icon .pen-body--d2 { fill: color-mix(in srgb, var(--pen) 55%, black); }
+
+
+
+
+/* Eyedropper tool — same dock slot language as pencil / eraser */
+.draw-tool-btn[data-tool="eyedropper"] {
+  width: 40px;
+  height: 52px;
+}
+.draw-tool-btn[data-tool="eyedropper"] .draw-tool-icon {
+  width: 34px;
+  min-width: 34px;
+  max-width: 34px;
+  height: 58px;
+  max-height: 58px;
+  object-fit: contain;
+  object-position: bottom center;
+  bottom: -12px;
+}
+.draw-tool-btn[data-tool="eyedropper"] .draw-tool-icon--selected,
+.draw-tool-btn[data-tool="eyedropper"].active .draw-tool-icon {
+  bottom: 10px;
+}
+
+/* Compact floating sample chip (swatch + hex). Not a paint editor. */
+.eyedrop-chip {
+  position: fixed;
+  z-index: 130;
+  left: 0;
+  top: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 36px;
+  padding: 4px;
+  gap: 4px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.06),
+    0 2px 8px rgba(0, 0, 0, 0.22),
+    0 8px 24px rgba(0, 0, 0, 0.16);
+  pointer-events: auto;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.eyedrop-chip[hidden] { display: none !important; }
+.eyedrop-chip__main {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  height: 28px;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+}
+.eyedrop-chip__swatch {
+  box-sizing: border-box;
+  display: block;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.12);
+  background: #000;
+  flex: 0 0 28px;
+}
+.eyedrop-chip__value {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 7.6em;
+  height: 28px;
+  margin: 0;
+  padding: 0;
+  color: #1c1917;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+  line-height: 28px;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.eyedrop-chip.is-copied .eyedrop-chip__value {
+  /* same metrics as hex so 已复制 / Copied does not shift the capsule */
+  letter-spacing: 0.02em;
+  font-weight: 500;
+}
+.eyedrop-chip__mode {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 32px;
+  width: 32px;
+  height: 28px;
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: #7a756e;
+  font-size: 9px;
+  font-weight: 650;
+  font-family: "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  letter-spacing: 0.06em;
+  line-height: 28px;
+  cursor: pointer;
+}
+.eyedrop-chip__mode:hover { background: #f3f2f0; color: #1c1917; }

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pocketclip</title>
+  <link rel="stylesheet" href="editor.css?v=1.11.14" />
+</head>
+<body data-theme="dark">
+  <div id="capture-pulse" class="capture-pulse" hidden aria-hidden="true"></div>
+  <header class="topbar" id="topbar">
+<span class="meta" id="view-meta"></span>
+
+    <div class="top-actions" role="group" aria-label="Export">
+      <button type="button" id="btn-clear" class="top-clear" hidden aria-label="Clear annotations">
+        <svg class="top-clear__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v9"/><path d="M9 11h6"/><path d="M8 11h8l1.2 8.5a1 1 0 0 1-1 1.1H7.8a1 1 0 0 1-1-1.1L8 11z"/><path d="M9.5 14.5v3"/><path d="M12 14.5v3"/><path d="M14.5 14.5v3"/></svg>
+        <span class="top-clear__label">Clear</span>
+      </button>
+      <button type="button" id="btn-copy" class="top-btn" aria-label="Copy">
+        <svg class="top-btn__icon top-btn__icon--fill" width="16" height="16" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M216,34H88a6,6,0,0,0-6,6V82H40a6,6,0,0,0-6,6V216a6,6,0,0,0,6,6H168a6,6,0,0,0,6-6V174h42a6,6,0,0,0,6-6V40A6,6,0,0,0,216,34ZM162,210H46V94H162Zm48-48H174V88a6,6,0,0,0-6-6H94V46H210Z"></path></svg>
+        <span class="top-btn__label">Copy</span>
+      </button>
+      <button type="button" id="btn-download" class="top-btn top-btn--primary" aria-label="Download">
+        <svg class="top-btn__icon top-btn__icon--fill" width="16" height="16" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M222,144v64a6,6,0,0,1-6,6H40a6,6,0,0,1-6-6V144a6,6,0,0,1,12,0v58H210V144a6,6,0,0,1,12,0Zm-98.24,4.24a6,6,0,0,0,8.48,0l40-40a6,6,0,0,0-8.48-8.48L134,129.51V32a6,6,0,0,0-12,0v97.51L92.24,99.76a6,6,0,0,0-8.48,8.48Z"></path></svg>
+        <span class="top-btn__label">Download</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="stage-wrap">
+    <div id="stage">
+      <canvas id="canvas"></canvas>
+      <canvas id="draw"></canvas>
+      <div id="crop-box" hidden></div>
+    </div>
+  </main>
+
+  <div class="draw-toolbar" id="dock-wrap">
+    <div class="draw-toolbar-group">
+      <div class="draw-toolbar-row1">
+        <div class="draw-toolbar-center">
+          <div class="draw-tools-container" role="toolbar" aria-label="Drawing tools">
+            <button type="button" class="draw-tool-btn active" data-tool="pen" data-tooltip="Pen" data-kbd="P" data-tip="top" aria-label="Pen">
+              <svg class="draw-tool-icon draw-tool-icon--selected pen-icon" viewBox="900 70 280 480" width="36" height="58" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+              <g>
+              <path class="pen-body pen-body--l1" d="M1094.2 341.438C1104.36 349.575 1110.86 362.748 1117.24 374.052C1120.68 383.24 1118.69 619.706 1118.69 646.546L1118.75 1613.35L1119.1 1614.03C1114.23 1616.6 1104.21 1616.71 1097.8 1617.79C1088.83 1618.25 1079.86 1618.66 1070.88 1618.99C1044.3 1620.45 992.79 1620.9 966.791 1618.21L958.605 1618L951.653 1617.15C946.376 1616.95 942.398 1616.36 937.222 1615.63L932.215 1614.47C932.591 1612.35 932.726 1610.14 932.923 1607.98L932.834 650.702L932.826 451.138C932.826 438.741 931.512 381.846 933.771 374.931C937.621 368.401 940.13 364.396 944.648 358.354C948.779 354.18 949.924 353.764 955.27 351.181L960.442 352.365C969.515 357.348 975.452 366.871 979.569 376.156C987.268 367.197 993.296 348.061 1007.93 353.725L1009.32 354.268C1014.51 360.064 1018.4 366.632 1021.83 373.6C1027.42 362.719 1035.23 344.6 1050.73 352.766C1058.69 356.958 1065.95 368.784 1070.72 376.307C1076.59 364.463 1083.73 349.743 1094.2 341.438Z" />
+              <path class="pen-body pen-body--d1" d="M1094.2 341.438C1104.36 349.575 1110.86 362.748 1117.24 374.052C1120.68 383.24 1118.69 619.706 1118.69 646.546L1118.75 1613.35L1119.1 1614.03C1114.23 1616.6 1104.21 1616.71 1097.8 1617.79C1088.83 1618.25 1079.86 1618.66 1070.88 1618.99L1070.87 1612.23C1071.82 1585.38 1071.18 1555.34 1071.16 1528.23L1071.13 1382.61L1071.11 927.188L1071.09 557.926L1071.13 441.72C1071.14 421.8 1071.84 396.69 1070.8 377.389L1070.72 376.307C1076.59 364.463 1083.73 349.743 1094.2 341.438Z" />
+              <path class="pen-body pen-body--d2" d="M1070.87 1612.23C1088.89 1612.03 1098.71 1610.83 1116.55 1608.15C1119.6 1611.62 1117.26 1609.55 1118.75 1613.35L1119.1 1614.03C1114.23 1616.6 1104.21 1616.71 1097.8 1617.79C1088.83 1618.25 1079.86 1618.66 1070.88 1618.99L1070.87 1612.23Z" />
+              <path class="pen-body pen-body--base" d="M955.27 351.184L960.442 352.368C969.515 357.351 975.452 366.874 979.569 376.159C978.443 385.832 979.004 410.286 979.017 420.962L979.11 508.494L979.053 800.505L979.051 1357.16L979.005 1530.5C978.984 1556.94 978.227 1586.52 978.842 1612.64L979.81 1612.79L985.497 1613.34C1015.89 1614.08 1039.91 1613.99 1070.31 1612.78L1070.32 783.638L1070.31 520.093L1070.16 431.881C1070.15 415.047 1069.75 393.994 1070.8 377.392C1071.84 396.693 1071.14 421.803 1071.13 441.723L1071.09 557.93L1071.11 927.191L1071.13 1382.61L1071.16 1528.23C1071.18 1555.34 1071.82 1585.38 1070.87 1612.23L1070.88 1618.99C1044.3 1620.45 992.79 1620.9 966.791 1618.21L958.605 1618L951.653 1617.15C946.376 1616.95 942.398 1616.36 937.222 1615.63L932.215 1614.47C932.591 1612.35 932.726 1610.14 932.923 1607.98L932.834 650.706L932.826 451.141C932.826 438.744 931.512 381.849 933.771 374.934C937.621 368.404 940.13 364.4 944.648 358.358C948.779 354.184 949.924 353.767 955.27 351.184Z" />
+              <path class="pen-body pen-body--d1" d="M932.923 1607.98C936.443 1608.7 939.567 1609.43 943.163 1609.71C947.354 1610.3 951.356 1611.07 955.574 1610.92C957.687 1612.8 958.63 1613.29 959.812 1615.83C956.994 1617.49 955.265 1617.01 951.653 1617.15C946.376 1616.95 942.398 1616.36 937.222 1615.63L932.215 1614.47C932.591 1612.35 932.726 1610.14 932.923 1607.98Z" />
+              <path class="pen-body pen-body--d1" d="M955.573 1610.92C962.402 1611.77 969.238 1612.56 976.082 1613.29C972.021 1614.96 970.342 1615.58 966.79 1618.21L958.604 1618L951.652 1617.15C955.264 1617.01 956.993 1617.49 959.811 1615.83C958.629 1613.29 957.686 1612.8 955.573 1610.92Z" />
+              <path class="pen-body pen-body--l2" d="M979.809 1612.79L979.991 657.608L979.979 445.476C979.981 432.832 979.969 395.285 980.021 380.062C980.459 379.432 980.898 378.802 981.336 378.172L982.875 378.815C987.918 392.429 985.312 623.685 985.302 654.545L985.334 1288.11L985.335 1499.9C985.337 1537.14 984.652 1576.26 985.496 1613.34L979.809 1612.79Z" />
+              <path fill="#FECBA0" d="M1056.46 124.848L1086.65 234.351C1098.09 275.879 1112.71 331.057 1117.24 374.055C1110.86 362.751 1104.36 349.577 1094.2 341.44C1083.73 349.745 1076.59 364.466 1070.72 376.31C1065.95 368.787 1058.69 356.96 1050.73 352.768C1035.23 344.602 1027.42 362.721 1021.83 373.602C1018.4 366.634 1014.51 360.066 1009.32 354.27L1007.93 353.728C993.295 348.064 987.267 367.199 979.568 376.158C975.451 366.873 969.513 357.35 960.44 352.367L955.268 351.183C949.922 353.766 948.777 354.183 944.646 358.357C940.128 364.399 937.62 368.403 933.77 374.933C938.79 320.959 956.432 255.088 971.085 203.055C978.141 177.999 985.105 150.07 992.948 125.525L994.4 127.656C997.084 128.795 998.526 129.381 1001.08 130.916C1004.36 131.914 1009.37 133.618 1012.58 134.244L1019.35 135.005L1021.87 134.515C1030.2 136.153 1037 133.907 1044.65 131.207L1051.27 128.491L1056.46 124.848Z" />
+              <path fill="#FECBA0" d="M992.948 125.523L994.4 127.654C997.084 128.793 998.526 129.379 1001.08 130.914C1004.36 131.912 1009.37 133.616 1012.58 134.242L1019.35 135.003C1016.71 149.948 1017.7 164.661 1017.71 179.851C1017.63 194.005 1017.18 208.155 1016.37 222.286C1014.72 250.253 1007.04 278.089 1005.06 306.296C1003.89 323.008 1006.94 337.48 1007.93 353.726C993.295 348.062 987.267 367.197 979.568 376.156C975.451 366.871 969.513 357.348 960.44 352.365L955.268 351.181C949.922 353.764 948.777 354.181 944.646 358.355C940.128 364.397 937.62 368.401 933.77 374.931C938.79 320.957 956.432 255.086 971.085 203.053C978.141 177.997 985.105 150.068 992.948 125.523Z" />
+              <path fill="#FEB884" d="M992.948 125.523L994.4 127.654C995.751 131.162 998.222 132.195 998.206 132.302C993.093 168.467 971.849 240.691 963.333 272.952C955.254 303.56 940.751 337.517 944.646 358.355C940.128 364.397 937.62 368.401 933.77 374.931C938.79 320.957 956.432 255.086 971.085 203.053C978.141 177.997 985.105 150.068 992.948 125.523Z" />
+              <path fill="#FEB884" d="M955.27 351.181C951.07 341.526 961.107 315.292 964.969 305.688C967.171 317.847 968.264 341.94 960.442 352.365L955.27 351.181Z" />
+              <path fill="#FEB884" d="M1003.63 143.793C1003.81 143.965 1004.02 144.107 1004.16 144.308C1008.56 150.558 981.064 299.169 978.135 317.265C976.335 329.096 974.767 340.961 973.432 352.853C969.339 346.414 971.757 310.753 973.471 302.452C984.343 249.809 993.525 196.528 1003.63 143.793Z" />
+              <path fill="#F28C64" d="M1056.46 124.848L1086.65 234.351C1098.09 275.879 1112.71 331.057 1117.24 374.055C1110.86 362.751 1104.36 349.577 1094.2 341.44C1091.14 320.696 1083.54 297.044 1079.61 275.735C1076.92 268.53 1074.01 256.252 1071.74 248.41C1062.74 217.372 1056.72 185.543 1049.03 154.223C1047.16 147.496 1045.75 138.112 1044.65 131.207L1051.27 128.491L1056.46 124.848Z" />
+              <path fill="#ED7754" d="M1049.03 154.221C1049.3 151.746 1049.36 150.711 1048.9 148.275L1049.92 147.844C1052.36 152.749 1053.96 161.202 1055.53 166.805C1064.57 199.228 1075.6 231.051 1084.2 263.595C1085.25 267.562 1086.3 271 1086.15 275.108C1084.93 273.981 1077.83 246.284 1076.37 241.528C1073.34 252.02 1083.21 272.88 1079.61 275.733C1076.92 268.528 1074.01 256.25 1071.74 248.408C1062.74 217.37 1056.72 185.541 1049.03 154.221Z" />
+              <path fill="#FEB884" d="M1019.35 135.006L1021.87 134.516C1023.73 153.327 1022.54 173.072 1023.13 191.986C1024.14 224.345 1019.02 256.008 1015.36 288C1013.33 305.769 1014.1 324.378 1012.17 342.195C1011.85 345.722 1011.36 351.74 1009.32 354.271L1007.93 353.729C1006.94 337.483 1003.89 323.011 1005.06 306.299C1007.04 278.092 1014.72 250.256 1016.37 222.289C1017.18 208.158 1017.63 194.008 1017.71 179.854C1017.7 164.664 1016.71 149.951 1019.35 135.006Z" />
+              <path class="pen-body pen-body--d1" d="M995.611 114.885C999.47 93.8226 1008.05 69.5588 1013.87 48.7318C1016.24 40.2801 1021.96 37.8887 1030.09 41.1864C1035.79 48.8096 1052.82 110.98 1056.46 124.846L1051.27 128.489L1044.65 131.205C1037 133.905 1030.2 136.151 1021.87 134.513L1019.35 135.003L1012.58 134.242C1009.37 133.616 1004.36 131.912 1001.08 130.914C998.527 129.379 997.085 128.793 994.401 127.654L992.949 125.523C993.617 120.89 994.135 119.399 995.611 114.885Z" />
+              <path class="pen-body pen-body--d2" d="M1030.09 41.1875C1035.79 48.8107 1052.82 110.981 1056.46 124.847L1051.27 128.49C1047.65 128.171 1047.34 128.325 1043.92 126.855C1042.53 124.275 1040.63 118.711 1040.11 115.535C1036.41 93.0387 1029.68 70.0945 1027.63 47.5772C1027.44 45.4981 1029.06 42.8522 1030.09 41.1875Z" />
+              <path class="pen-body pen-body--l2" d="M1019.09 61.4922C1019.62 64.9883 1020.08 67.7417 1020.24 71.2666C1017.38 88.8777 1013.89 116.254 1012.58 134.244C1009.37 133.618 1004.36 131.914 1001.08 130.916C1002.41 127.49 1004.63 118.187 1005.68 114.211C1009.76 96.5418 1014.23 78.9643 1019.09 61.4922Z" />
+              <path class="pen-body pen-body--l1" d="M1019.09 61.4927C1020.06 55.554 1020.38 53.7641 1022.47 47.9453C1022 53.4454 1021.23 66.386 1020.24 71.2671C1020.08 67.7422 1019.62 64.9888 1019.09 61.4927Z" />
+              </g>
+              </svg>
+              <span class="ui-tip" aria-hidden="true"><span class="ui-tip__text">Pen</span><kbd class="ui-tip__kbd">P</kbd></span>
+            </button>
+            <button type="button" class="draw-tool-btn" data-tool="eraser" data-tooltip="Eraser" data-kbd="E" data-tip="top" aria-label="Eraser">
+              <img class="draw-tool-icon" src="assets/eraser.png" width="52" height="58" alt="" draggable="false" />
+              <span class="ui-tip" aria-hidden="true"><span class="ui-tip__text">Eraser</span><kbd class="ui-tip__kbd">E</kbd></span>
+            </button>
+            <button type="button" class="draw-tool-btn" data-tool="eyedropper" data-tooltip="Eyedropper" data-tip="top" aria-label="Eyedropper">
+              <svg class="draw-tool-icon" viewBox="0 0 36 64" width="36" height="58" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="edBulbX" x1="0" y1="0.15" x2="1" y2="0.85">
+                    <stop offset="0%" stop-color="#F4B2A6"/>
+                    <stop offset="42%" stop-color="#D45648"/>
+                    <stop offset="100%" stop-color="#8F322C"/>
+                  </linearGradient>
+                  <linearGradient id="edGlassX" x1="0" y1="0.5" x2="1" y2="0.5">
+                    <stop offset="0%" stop-color="#DDE3E8"/>
+                    <stop offset="35%" stop-color="#F7FAFC"/>
+                    <stop offset="70%" stop-color="#C5CDD3"/>
+                    <stop offset="100%" stop-color="#8E979E"/>
+                  </linearGradient>
+                  <linearGradient id="edTipX" x1="0.2" y1="1" x2="0.8" y2="0">
+                    <stop offset="0%" stop-color="#C8CDD2"/>
+                    <stop offset="55%" stop-color="#8D949A"/>
+                    <stop offset="100%" stop-color="#4E555B"/>
+                  </linearGradient>
+                  <linearGradient id="edRingX" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stop-color="#F0EEEA"/>
+                    <stop offset="50%" stop-color="#C4BFB8"/>
+                    <stop offset="100%" stop-color="#7A756E"/>
+                  </linearGradient>
+                  <filter id="edShadowX" x="-30%" y="-10%" width="160%" height="130%">
+                    <feDropShadow dx="0" dy="0.6" stdDeviation="0.8" flood-color="#000" flood-opacity="0.35"/>
+                  </filter>
+                </defs>
+                <g filter="url(#edShadowX)">
+                  <!-- Tip points up (out of the dock), bulb sits in the tray — same stance as the pen. -->
+                  <g transform="translate(0,64) scale(1,-1)">
+                    <path fill="url(#edBulbX)" d="M18 1.6c5.6 0 10 4.2 10 10.2 0 4.2-2.2 7.2-5.2 9.4 0.1 0.6 0.2 1.2 0.2 1.6H13c0-0.4 0.1-1 0.2-1.6C10.2 19 8 16 8 11.8 8 5.8 12.4 1.6 18 1.6Z"/>
+                    <rect x="11.2" y="20.4" width="13.6" height="5.4" rx="1.6" fill="url(#edRingX)"/>
+                    <path fill="url(#edGlassX)" d="M13.2 25.6h9.6c0.7 0 1.2 0.5 1.2 1.2v20.2c0 0.7-0.5 1.2-1.2 1.2h-9.6c-0.7 0-1.2-0.5-1.2-1.2V26.8c0-0.7 0.5-1.2 1.2-1.2Z"/>
+                    <path fill="url(#edTipX)" d="M13.4 47.8h9.2c.4 0 .6.4.4.8l-4.2 13.2c-.2.6-1 .6-1.2 0L13 48.6c-.2-.4 0-.8.4-.8Z"/>
+                  </g>
+                  <path fill="#F8C9C0" fill-opacity="0.7" d="M14.2 58.8c1.6 1.4 4.2 2 6.2 1.3 0.4-0.2-0.2-0.6-0.7-0.7-2.1-0.4-3.8-1.2-5.1-2.4-0.4-0.3-0.8-0.1-0.4 1.8Z"/>
+                  <rect x="12.4" y="41.7" width="11.2" height="1.1" rx="0.5" fill="#FFF" fill-opacity="0.35"/>
+                  <path fill="#FFF" fill-opacity="0.55" d="M15.1 36.8c0.5 0 0.9-0.4 0.9-1.2V18.8c0-0.8-0.4-1.2-0.9-1.2s-0.9 0.4-0.9 1.2v16.8c0 0.8 0.4 1.2 0.9 1.2Z"/>
+                  <path fill="#E8ECEF" fill-opacity="0.45" d="M16.2 14.8c.2 0 .3-.2.3-.3l-1.3-4.2c-.1-.2-.3-.2-.3 0l-1.1 4.2c0 .2.1.3.3.3h2.1Z"/>
+                </g>
+              </svg>
+              <span class="ui-tip" aria-hidden="true"><span class="ui-tip__text">Eyedropper</span></span>
+            </button>
+          </div>
+          <div class="draw-colors-section">
+            <div class="draw-color-wrap" id="color-wrap">
+              <div class="draw-color-palette" id="color-palette" role="group" aria-label="Colors">
+                <button type="button" class="draw-color-btn active" data-color="#262523" data-tooltip="Ink" data-tip="top" style="--swatch:#262523"><span class="draw-color-plate" aria-hidden="true"></span></button>
+                <button type="button" class="draw-color-btn" data-color="#F3F2F0" data-tooltip="White" data-tip="top" style="--swatch:#F3F2F0"><span class="draw-color-plate" aria-hidden="true"></span></button>
+                <button type="button" class="draw-color-btn" data-color="#E04A2E" data-tooltip="Red" data-tip="top" style="--swatch:#E04A2E"><span class="draw-color-plate" aria-hidden="true"></span></button>
+                <button type="button" class="draw-color-btn" data-color="#F6CE52" data-tooltip="Yellow" data-tip="top" style="--swatch:#F6CE52"><span class="draw-color-plate" aria-hidden="true"></span></button>
+                <button type="button" class="draw-color-btn" data-color="#4ADE80" data-tooltip="Green" data-tip="top" style="--swatch:#4ADE80"><span class="draw-color-plate" aria-hidden="true"></span></button>
+                <button type="button" class="draw-color-btn" data-color="#285FC4" data-tooltip="Blue" data-tip="top" style="--swatch:#285FC4"><span class="draw-color-plate" aria-hidden="true"></span></button>
+                <button type="button" class="draw-color-btn draw-color-btn--custom" id="btn-custom-color" data-tooltip="Custom" data-tip="top" aria-label="Custom color" aria-expanded="false" aria-controls="color-picker-pop">
+                  <span class="draw-color-plate" aria-hidden="true"></span>
+                  <span class="draw-color-custom-ring" aria-hidden="true"></span>
+                </button>
+              </div>
+            </div>
+            <input type="color" id="color" value="#262523" hidden />
+            <input type="hidden" id="lineWidth" value="6" />
+            <div class="stroke-sizes" role="group" aria-label="Stroke size">
+              <button type="button" class="stroke-size-btn" data-width="3" data-tooltip="Thin" data-tip="top" aria-label="Thin">
+                <svg viewBox="0 0 32 32" width="22" height="22" fill="none" aria-hidden="true"><path d="M7 24 C9.2 24 9.2 8 11.5 8 C13.8 8 13.8 24 16.1 24 C18.4 24 18.4 8 20.7 8 C23 8 23 20 25 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+              <button type="button" class="stroke-size-btn active" data-width="6" data-tooltip="Medium" data-tip="top" aria-label="Medium">
+                <svg viewBox="0 0 32 32" width="22" height="22" fill="none" aria-hidden="true"><path d="M7 24 C9.2 24 9.2 8 11.5 8 C13.8 8 13.8 24 16.1 24 C18.4 24 18.4 8 20.7 8 C23 8 23 20 25 14" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+              <button type="button" class="stroke-size-btn" data-width="12" data-tooltip="Thick" data-tip="top" aria-label="Thick">
+                <svg viewBox="0 0 32 32" width="22" height="22" fill="none" aria-hidden="true"><path d="M7 24 C9.2 24 9.2 8 11.5 8 C13.8 8 13.8 24 16.1 24 C18.4 24 18.4 8 20.7 8 C23 8 23 20 25 14" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+            <div class="history-btns">
+              <button type="button" id="btn-undo" class="draw-icon-btn" data-tooltip="Undo" data-tip="top" aria-label="Undo">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14L4 9l5-5"/><path d="M4 9h10a6 6 0 0 1 0 12h-3"/></svg>
+              </button>
+              <button type="button" id="btn-redo" class="draw-icon-btn" data-tooltip="Redo" data-tip="top" aria-label="Redo">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14l5-5-5-5"/><path d="M20 9H10a6 6 0 0 0 0 12h3"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="eyedrop-chip" class="eyedrop-chip" hidden>
+    <button type="button" class="eyedrop-chip__main" id="eyedrop-chip-main" aria-label="Copy color">
+      <span class="eyedrop-chip__swatch" id="eyedrop-chip-swatch"></span>
+      <span class="eyedrop-chip__value" id="eyedrop-chip-value">#000000</span>
+    </button>
+    <button type="button" class="eyedrop-chip__mode" id="eyedrop-chip-mode" aria-label="HEX">HEX</button>
+  </div>
+  <p id="toast" class="toast" hidden></p>
+  <div class="color-picker-pop" id="color-picker-pop" hidden role="dialog" aria-label="Custom color">
+    <div class="cp-sv" id="cp-sv">
+      <canvas id="cp-sv-canvas" width="104" height="64"></canvas>
+      <div class="cp-sv-knob" id="cp-sv-knob"></div>
+    </div>
+    <div class="cp-hue" id="cp-hue">
+      <canvas id="cp-hue-canvas" width="104" height="8"></canvas>
+      <div class="cp-hue-knob" id="cp-hue-knob"></div>
+    </div>
+    <div class="cp-row">
+      <span class="cp-preview" id="cp-preview"></span>
+      <input class="cp-hex" id="cp-hex" type="text" spellcheck="false" maxlength="7" value="#262523" />
+    </div>
+  </div>
+  <script src="../sfx.js"></script>
+  <script src="perfect-freehand.js"></script>
+  <script src="editor.js?v=1.10.99"></script>
+
+</body>

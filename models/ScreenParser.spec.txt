@@ -1,0 +1,177 @@
+input {
+  name: "image"
+  type {
+    imageType {
+      width: 1280
+      height: 1280
+      colorSpace: RGB
+    }
+  }
+}
+output {
+  name: "var_2219"
+  type {
+    multiArrayType {
+      shape: 1
+      shape: 59
+      shape: 33600
+      dataType: FLOAT32
+    }
+  }
+}
+metadata {
+  shortDescription: "Ultralytics YOLO11l model trained on ../data_v2/yolo_leaf_filtered/data.yaml"
+  versionString: "8.4.210"
+  author: "Ultralytics"
+  license: "AGPL-3.0 License (https://ultralytics.com/license)"
+  userDefined {
+    key: "task"
+    value: "detect"
+  }
+  userDefined {
+    key: "stride"
+    value: "32"
+  }
+  userDefined {
+    key: "names"
+    value: "{0: \'Table\', 1: \'Column/Browser\', 2: \'Button\', 3: \'Utility Button\', 4: \'App Icon\', 5: \'Navigation Bar\', 6: \'Status Bar\', 7: \'Search Field\', 8: \'Toolbar\', 9: \'Tooltip\', 10: \'Video\', 11: \'Tab Bar\', 12: \'Side Bar\', 13: \'Slider\', 14: \'Picker\', 15: \'ContextMenu\', 16: \'DockMenu\', 17: \'EditMenu\', 18: \'Image\', 19: \'Scroll\', 20: \'Switch\', 21: \'File Icon\', 22: \'Chart\', 23: \'Window\', 24: \'Screen\', 25: \'List\', 26: \'List Item\', 27: \'PopUp Menu\', 28: \'Steppers\', 29: \'Toggles\', 30: \'Text Input\', 31: \'Rating Indicator\', 32: \'Checkbox\', 33: \'Radiobox\', 34: \'Select\', 35: \'Avatar\', 36: \'Badge\', 37: \'Alert\', 38: \'Progress bar\', 39: \'Bottom navigation\', 40: \'Breadcrumb\', 41: \'Page control\', 42: \'Link\', 43: \'Menu\', 44: \'Pagination\', 45: \'Tab\', 46: \'Search Bar\', 47: \'Date-Time picker\', 48: \'Calendar\', 49: \'Text\', 50: \'Heading\', 51: \'Code snippet\', 52: \'Carousel\', 53: \'Notification\', 54: \'Logo\'}"
+  }
+  userDefined {
+    key: "imgsz"
+    value: "[1280, 1280]"
+  }
+  userDefined {
+    key: "head"
+    value: "Detect"
+  }
+  userDefined {
+    key: "end2end"
+    value: "False"
+  }
+  userDefined {
+    key: "docs"
+    value: "https://docs.ultralytics.com"
+  }
+  userDefined {
+    key: "date"
+    value: "2026-11-11T12:03:17.032587+08:00"
+  }
+  userDefined {
+    key: "com.github.apple.coremltools.version"
+    value: "9.0"
+  }
+  userDefined {
+    key: "com.github.apple.coremltools.source"
+    value: "torch==2.15.0"
+  }
+  userDefined {
+    key: "com.github.apple.coremltools.source_dialect"
+    value: "TorchScript"
+  }
+  userDefined {
+    key: "com.github.apple.coremltools.conversion_date"
+    value: "2026-11-11"
+  }
+  userDefined {
+    key: "channels"
+    value: "3"
+  }
+  userDefined {
+    key: "batch"
+    value: "1"
+  }
+  userDefined {
+    key: "args"
+    value: "{\'batch\': 1, \'quantize\': None, \'nms\': False, \'dynamic\': False}"
+  }
+}
+
+
+input {
+  name: "image"
+  type {
+    imageType {
+      width: 1280
+      height: 1280
+      colorSpace: RGB
+    }
+  }
+}
+output {
+  name: "var_2219"
+  type {
+    multiArrayType {
+      shape: 1
+      shape: 59
+      shape: 33600
+      dataType: FLOAT32
+    }
+  }
+}
+metadata {
+  shortDescription: "Ultralytics YOLO11l model trained on ../data_v2/yolo_leaf_filtered/data.yaml"
+  versionString: "8.4.210"
+  author: "Ultralytics"
+  license: "AGPL-3.0 License (https://ultralytics.com/license)"
+  userDefined {
+    key: "task"
+    value: "detect"
+  }
+  userDefined {
+    key: "stride"
+    value: "32"
+  }
+  userDefined {
+    key: "names"
+    value: "{0: \'Table\', 1: \'Column/Browser\', 2: \'Button\', 3: \'Utility Button\', 4: \'App Icon\', 5: \'Navigation Bar\', 6: \'Status Bar\', 7: \'Search Field\', 8: \'Toolbar\', 9: \'Tooltip\', 10: \'Video\', 11: \'Tab Bar\', 12: \'Side Bar\', 13: \'Slider\', 14: \'Picker\', 15: \'ContextMenu\', 16: \'DockMenu\', 17: \'EditMenu\', 18: \'Image\', 19: \'Scroll\', 20: \'Switch\', 21: \'File Icon\', 22: \'Chart\', 23: \'Window\', 24: \'Screen\', 25: \'List\', 26: \'List Item\', 27: \'PopUp Menu\', 28: \'Steppers\', 29: \'Toggles\', 30: \'Text Input\', 31: \'Rating Indicator\', 32: \'Checkbox\', 33: \'Radiobox\', 34: \'Select\', 35: \'Avatar\', 36: \'Badge\', 37: \'Alert\', 38: \'Progress bar\', 39: \'Bottom navigation\', 40: \'Breadcrumb\', 41: \'Page control\', 42: \'Link\', 43: \'Menu\', 44: \'Pagination\', 45: \'Tab\', 46: \'Search Bar\', 47: \'Date-Time picker\', 48: \'Calendar\', 49: \'Text\', 50: \'Heading\', 51: \'Code snippet\', 52: \'Carousel\', 53: \'Notification\', 54: \'Logo\'}"
+  }
+  userDefined {
+    key: "imgsz"
+    value: "[1280, 1280]"
+  }
+  userDefined {
+    key: "head"
+    value: "Detect"
+  }
+  userDefined {
+    key: "end2end"
+    value: "False"
+  }
+  userDefined {
+    key: "docs"
+    value: "https://docs.ultralytics.com"
+  }
+  userDefined {
+    key: "date"
+    value: "2026-11-11T12:03:17.032587+08:00"
+  }
+  userDefined {
+    key: "com.github.apple.coremltools.version"
+    value: "9.0"
+  }
+  userDefined {
+    key: "com.github.apple.coremltools.source"
+    value: "torch==2.15.0"
+  }
+  userDefined {
+    key: "com.github.apple.coremltools.source_dialect"
+    value: "TorchScript"
+  }
+  userDefined {
+    key: "com.github.apple.coremltools.conversion_date"
+    value: "2026-11-11"
+  }
+  userDefined {
+    key: "channels"
+    value: "3"
+  }
+  userDefined {
+    key: "batch"
+    value: "1"
+  }
+  userDefined {
+    key: "args"
+    value: "{\'batch\': 1, \'quantize\': None, \'nms\': False, \'dynamic\': False}"
+  }
+}
+
