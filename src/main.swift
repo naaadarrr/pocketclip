@@ -928,14 +928,16 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         let menu = NSMenu()
         add(menu, L("menu.region"), "2", #selector(region), [.command, .shift]); add(menu, L("menu.window"), "3", #selector(window), [.command, .shift]); add(menu, L("menu.screen"), "f", #selector(screen))
         menu.addItem(.separator()); add(menu, L("menu.history"), "h", #selector(showHistory), [.command, .shift])
-        menu.addItem(.separator()); let rl = menu.addItem(withTitle: L("menu.restart"), action: #selector(relaunch), keyEquivalent: ""); rl.target = self
+        menu.addItem(.separator()); let up = menu.addItem(withTitle: L("menu.update"), action: #selector(checkUpdates), keyEquivalent: ""); up.target = self
+        let rl = menu.addItem(withTitle: L("menu.restart"), action: #selector(relaunch), keyEquivalent: ""); rl.target = self
         menu.addItem(withTitle: L("menu.quit"), action: #selector(NSApp.terminate(_:)), keyEquivalent: "q")
         item.menu = menu
         registerHotkeys()
+        if !CommandLine.arguments.contains("--dump-strings") { UpdateChecker.shared.start() }
         NotificationCenter.default.addObserver(forName: History.changed, object: nil, queue: .main) { [weak self] _ in
             let has = !History.items().isEmpty; self?.editor?.web.evaluateJavaScript("window.pcSetHistory && pcSetHistory(\(has))") }
         let a = CommandLine.arguments
-        if a.contains("--dump-strings") { for k in ["menu.region","menu.window","menu.screen","menu.restart","menu.quit","menu.history","history.title","perm.title","perm.open","perm.later"] { print(k, "=", L(k)) }; exit(0) }
+        if a.contains("--dump-strings") { for k in ["menu.region","menu.window","menu.screen","menu.restart","menu.quit","menu.history","history.title","perm.title","perm.open","perm.later","menu.update","update.available.title","update.uptodate.title"] { print(k, "=", L(k)) }; exit(0) }
         forceHoverFirst = a.contains("--hover-first")
         // Perf: --bench-screen N runs N fullscreen captures after warm (2s gap).
         if let i = a.firstIndex(of: "--bench-screen") {
@@ -1008,6 +1010,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     @objc func relaunch() {
         let p = Process(); p.executableURL = URL(fileURLWithPath: "/bin/sh"); p.arguments = ["-c", "sleep 1; open \"\(Bundle.main.bundlePath)\""]; try? p.run(); NSApp.terminate(nil)
     }
+    @objc func checkUpdates() { UpdateChecker.shared.check(manual: true) }
     @objc func region() { go(.region) }
     @objc func window() { go(.window) }
     @objc func screen() { go(.screen) }

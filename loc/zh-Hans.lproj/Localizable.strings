@@ -32,3 +32,15 @@
 "region.cancel" = "取消";
 
 "region.block" = "区块 · %d×%d";
+
+"menu.update" = "检查更新…";
+"update.available.title" = "Pocketclip 有新版本 %@";
+"update.available.body" = "你当前使用的是 %@ 版，可以前往发布页下载新版本。";
+"update.download" = "前往下载";
+"update.later" = "稍后";
+"update.skip" = "跳过此版本";
+"update.uptodate.title" = "已是最新版本";
+"update.uptodate.body" = "Pocketclip %@ 已是最新版本。";
+"update.error.title" = "无法检查更新";
+"update.error.body" = "请检查网络连接后稍后再试。";
+"update.ok" = "好";

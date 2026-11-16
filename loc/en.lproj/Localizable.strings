@@ -32,3 +32,15 @@
 "region.cancel" = "Cancel";
 
 "region.block" = "Block · %d×%d";
+
+"menu.update" = "Check for Updates…";
+"update.available.title" = "Pocketclip %@ is available";
+"update.available.body" = "You're using version %@. Download the new version from the release page.";
+"update.download" = "Download";
+"update.later" = "Later";
+"update.skip" = "Skip This Version";
+"update.uptodate.title" = "You're up to date";
+"update.uptodate.body" = "Pocketclip %@ is the latest version.";
+"update.error.title" = "Couldn't check for updates";
+"update.error.body" = "Please check your internet connection and try again later.";
+"update.ok" = "OK";
