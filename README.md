@@ -6,6 +6,8 @@ Pocketclip is a local macOS screenshot tool by Shawn Liu. Capture a region or a 
 
 Hover a layout block and click to capture, or drag to select freely. After capture, a compact editor lets you mark up the image, pick colors, and browse recent shots.
 
+![Pocketclip editor after a capture](docs/images/screenshot.png)
+
 ## Requirements
 
 - macOS 14 Sonoma or later

@@ -24,9 +24,9 @@ let sharedPool = WKProcessPool()
 let canvasBG = NSColor(srgbRed: 0x12/255.0, green: 0x13/255.0, blue: 0x14/255.0, alpha: 1)
 let canvasBGLight = NSColor(srgbRed: 0xec/255.0, green: 0xea/255.0, blue: 0xe6/255.0, alpha: 1)
 func canvasSolidColor() -> NSColor { gridLight ? canvasBGLight : canvasBG }
-/// Fixed 960×620 pt editor window. Uniformly shrinks to 80%×85% of the screen, keeping aspect.
+/// Fixed 900×620 pt editor window. Uniformly shrinks to 80%×85% of the screen, keeping aspect.
 func editorDefaultSize(in vis: NSRect) -> NSSize {
-    let defW: CGFloat = 960, defH: CGFloat = 620
+    let defW: CGFloat = 900, defH: CGFloat = 620
     let scale = min(1, (vis.width * 0.8) / defW, (vis.height * 0.85) / defH)
     return NSSize(width: (defW * scale).rounded(), height: (defH * scale).rounded())
 }
@@ -367,6 +367,14 @@ final class Editor: NSObject, WKScriptMessageHandler, WKNavigationDelegate, NSWi
     }
     func windowShouldClose(_ sender: NSWindow) -> Bool { hide(); return false }
     func windowDidBecomeKey(_ notification: Notification) { idleHistoryButton() }
+    func windowWillMiniaturize(_ notification: Notification) {
+        // Accessory apps have no Dock tile; show one while the editor is minimized.
+        NSApp.setActivationPolicy(.regular)
+    }
+    func windowDidDeminiaturize(_ notification: Notification) {
+        NSApp.setActivationPolicy(.accessory)
+        NSApp.activate(ignoringOtherApps: true)
+    }
     /// Build the single long-lived editor (panel + WKWebView). Call warm() at launch to preload the page.
     override init() {
         tlog("editor init (singleton)")
@@ -378,7 +386,7 @@ final class Editor: NSObject, WKScriptMessageHandler, WKNavigationDelegate, NSWi
         let vis = scr.visibleFrame; home = scr
         let sz = editorDefaultSize(in: vis)
         web = DragWebView(frame: NSRect(origin: .zero, size: sz), configuration: cfg)
-        panel = NSPanel(contentRect: NSRect(origin: .zero, size: sz), styleMask: [.titled, .closable, .resizable, .fullSizeContentView], backing: .buffered, defer: false)
+        panel = NSPanel(contentRect: NSRect(origin: .zero, size: sz), styleMask: [.titled, .closable, .miniaturizable, .resizable, .fullSizeContentView], backing: .buffered, defer: false)
         super.init()
         cfg.userContentController.add(self, name: "pc")
         web.navigationDelegate = self
@@ -415,7 +423,7 @@ final class Editor: NSObject, WKScriptMessageHandler, WKNavigationDelegate, NSWi
             panel.isOpaque = false
             panel.backgroundColor = .clear
             fx.isHidden = false
-            // Mid-weight frost: more veil than .hudWindow, lighter than .headerView.
+            // Mid frost: less see-through than the .hudWindow trial.
             fx.material = .titlebar
             fx.blendingMode = .behindWindow
             fx.state = .active
