@@ -1,7 +1,5 @@
 # Pocketclip
 
-<img src="docs/images/icon.png" width="128" height="128" alt="Pocketclip icon">
-
 Pocketclip is a local macOS screenshot tool by Shawn Liu. Capture a region or a window, annotate it, then copy or save — all on your Mac, with no account and no network.
 
 Hover a layout block and click to capture, or drag to select freely. After capture, a compact editor lets you mark up the image, pick colors, and browse recent shots.
