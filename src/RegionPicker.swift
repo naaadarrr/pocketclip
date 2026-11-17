@@ -192,7 +192,7 @@ private enum RegionCaptureCursor {
 
 private final class RegionOverlayView: NSView {
     var dimColor = NSColor(calibratedWhite: 0, alpha: 0.28)
-    var punchColor = NSColor(calibratedWhite: 0, alpha: 0.42)
+    var punchColor = NSColor(calibratedWhite: 0, alpha: 0.50)
     var highlight: NSRect?
     /// Dashed for snap/recognition; solid for free-drag selection.
     var highlightDashed = true
@@ -219,15 +219,16 @@ private final class RegionOverlayView: NSView {
             if highlightDashed {
                 border.setLineDash(dashes, count: dashes.count, phase: 0)
             }
+            // Soft outer shadow instead of a hard dark inner line.
+            NSGraphicsContext.saveGraphicsState()
+            let shadow = NSShadow()
+            shadow.shadowOffset = .zero
+            shadow.shadowBlurRadius = 2
+            shadow.shadowColor = NSColor(calibratedWhite: 0, alpha: 0.35)
+            shadow.set()
             NSColor(calibratedWhite: 1, alpha: 0.95).setStroke()
             border.stroke()
-            NSColor(calibratedWhite: 0, alpha: 0.25).setStroke()
-            let inset = NSBezierPath(rect: h.insetBy(dx: 0.5, dy: 0.5))
-            inset.lineWidth = 1
-            if highlightDashed {
-                inset.setLineDash(dashes, count: dashes.count, phase: 0)
-            }
-            inset.stroke()
+            NSGraphicsContext.restoreGraphicsState()
         } else {
             dimColor.setFill()
             bounds.fill()
@@ -424,6 +425,8 @@ private final class RegionTipView: NSView {
     private var text = ""
     var onCancel: (() -> Void)?
     private let cancelButton = RegionTipCancelButton(frame: .zero)
+    private let blur = NSVisualEffectView(frame: .zero)
+    private let face = RegionTipFace(frame: .zero)
 
     private static let capsuleHeight: CGFloat = 38
     private static let padLeft: CGFloat = 17
@@ -434,7 +437,7 @@ private final class RegionTipView: NSView {
     private static let screenMargin: CGFloat = 12
 
     static let textColor = NSColor(calibratedRed: 29 / 255, green: 29 / 255, blue: 31 / 255, alpha: 1)
-    static let capsuleFill = NSColor(calibratedRed: 245 / 255, green: 245 / 255, blue: 247 / 255, alpha: 0.82)
+    static let capsuleFill = NSColor(calibratedRed: 245 / 255, green: 245 / 255, blue: 247 / 255, alpha: 0.55)
     static let capsuleStroke = NSColor(calibratedRed: 150 / 255, green: 154 / 255, blue: 164 / 255, alpha: 0.50)
 
     override var isOpaque: Bool { false }
@@ -442,8 +445,20 @@ private final class RegionTipView: NSView {
     static func make(_ text: String) -> RegionTipView {
         let v = RegionTipView(frame: .zero)
         v.wantsLayer = true
-        v.layer?.backgroundColor = capsuleFill.cgColor
+        v.layer?.backgroundColor = NSColor.clear.cgColor
         v.layer?.isOpaque = false
+        v.blur.material = .popover
+        v.blur.blendingMode = .behindWindow
+        v.blur.state = .active
+        v.blur.appearance = NSAppearance(named: .aqua)
+        v.blur.wantsLayer = true
+        v.blur.layer?.cornerRadius = capsuleHeight / 2
+        v.blur.layer?.masksToBounds = true
+        v.blur.autoresizingMask = [.width, .height]
+        v.addSubview(v.blur)
+        v.face.owner = v
+        v.face.autoresizingMask = [.width, .height]
+        v.addSubview(v.face)
         v.layer?.cornerRadius = capsuleHeight / 2
         v.layer?.borderWidth = 0
         v.layer?.masksToBounds = false
@@ -496,6 +511,7 @@ private final class RegionTipView: NSView {
         self.text = text
         layoutTip()
         needsDisplay = true
+        face.needsDisplay = true
     }
 
     private func layoutTip() {
@@ -505,6 +521,9 @@ private final class RegionTipView: NSView {
         let width = Self.padLeft + ceil(textSize.width) + Self.gap + btnW + Self.padRight
         setFrameSize(NSSize(width: width, height: Self.capsuleHeight))
         let btnY = ((Self.capsuleHeight - Self.buttonHeight) / 2).rounded(.toNearestOrAwayFromZero)
+        blur.frame = bounds
+        face.frame = bounds
+        face.needsDisplay = true
         cancelButton.frame = NSRect(
             x: width - Self.padRight - btnW,
             y: btnY,
@@ -538,13 +557,15 @@ private final class RegionTipView: NSView {
         return max(side, min((bounds.width - width) / 2, bounds.width - width - side))
     }
 
-    override func draw(_ dirtyRect: NSRect) {
+    func drawFace(_ bounds: NSRect) {
         let inset = bounds.insetBy(dx: 0.5, dy: 0.5)
         let radius = max(0, inset.height / 2)
         let path = NSBezierPath(roundedRect: inset, xRadius: radius, yRadius: radius)
 
         NSGraphicsContext.saveGraphicsState()
         path.addClip()
+        Self.capsuleFill.setFill()
+        bounds.fill()
         NSGradient(colors: [
             NSColor(calibratedWhite: 1, alpha: 0.50),
             NSColor(calibratedWhite: 1, alpha: 0)
@@ -575,6 +596,15 @@ private final class RegionTipView: NSView {
         )
         (text as NSString).draw(with: rect, options: [.usesLineFragmentOrigin, .usesFontLeading], attributes: Self.textAttributes, context: nil)
     }
+}
+
+/// Draws the tip's tint, sheen, border and label above the blur backdrop.
+private final class RegionTipFace: NSView {
+    weak var owner: RegionTipView?
+    override var isOpaque: Bool { false }
+    override var isFlipped: Bool { true }
+    override func hitTest(_ point: NSPoint) -> NSView? { nil }
+    override func draw(_ dirtyRect: NSRect) { owner?.drawFace(bounds) }
 }
 
 /// Smart region picker — box tree (AX + optional ScreenParser) built once; drag for freeform.

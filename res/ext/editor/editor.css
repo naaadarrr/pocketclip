@@ -382,7 +382,7 @@ body[data-theme="light"] #stage-wrap {
 }
 body[data-theme="light"] #stage {
   box-shadow: none;
-  border-color: rgba(0,0,0,.08);
+  border: 0;
 }
 
 /* Solid themed fill when macOS Reduce Transparency is on (native vibrancy is disabled). */
@@ -430,8 +430,8 @@ body.pc-reduce-transparency[data-theme="light"] #stage-wrap {
   box-shadow: none;
   border-radius: 0;
   overflow: hidden;
-  background: #1a1b1d;
-  border: 1px solid rgba(255,255,255,.06);
+  background: transparent;
+  border: 0;
   /* NEVER default to invisible — a missed is-ready left size+shot blank */
   opacity: 1;
   transform: none;
@@ -474,7 +474,7 @@ body.is-capturing .top-actions {
   z-index: 0;
   max-width: none;
   cursor: crosshair;
-  background: #1a1b1d;
+  background: transparent;
   pointer-events: none;
 }
 #draw {
