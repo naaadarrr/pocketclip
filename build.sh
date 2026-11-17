@@ -49,8 +49,8 @@ if [ -f models/screenparser_names.json ]; then
 fi
 /usr/libexec/PlistBuddy -c "Set :CFBundleIconFile AppIcon" ~/Applications/Pocketclip.app/Contents/Info.plist 2>/dev/null || /usr/libexec/PlistBuddy -c "Add :CFBundleIconFile string AppIcon" ~/Applications/Pocketclip.app/Contents/Info.plist
 /usr/libexec/PlistBuddy -c "Set :NSAccessibilityUsageDescription Pocketclip highlights buttons and blocks in the current window when you capture a region. / 框选截图时，Pocketclip 会高亮当前窗口中的按钮和区块。" ~/Applications/Pocketclip.app/Contents/Info.plist 2>/dev/null || /usr/libexec/PlistBuddy -c "Add :NSAccessibilityUsageDescription string Pocketclip highlights buttons and blocks in the current window when you capture a region. / 框选截图时，Pocketclip 会高亮当前窗口中的按钮和区块。" ~/Applications/Pocketclip.app/Contents/Info.plist
-/usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString 0.1.1" ~/Applications/Pocketclip.app/Contents/Info.plist 2>/dev/null || /usr/libexec/PlistBuddy -c "Add :CFBundleShortVersionString string 0.1.1" ~/Applications/Pocketclip.app/Contents/Info.plist
-/usr/libexec/PlistBuddy -c "Set :CFBundleVersion 0.1.1" ~/Applications/Pocketclip.app/Contents/Info.plist 2>/dev/null || /usr/libexec/PlistBuddy -c "Add :CFBundleVersion string 0.1.1" ~/Applications/Pocketclip.app/Contents/Info.plist
+/usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString 0.1.2" ~/Applications/Pocketclip.app/Contents/Info.plist 2>/dev/null || /usr/libexec/PlistBuddy -c "Add :CFBundleShortVersionString string 0.1.2" ~/Applications/Pocketclip.app/Contents/Info.plist
+/usr/libexec/PlistBuddy -c "Set :CFBundleVersion 0.1.2" ~/Applications/Pocketclip.app/Contents/Info.plist 2>/dev/null || /usr/libexec/PlistBuddy -c "Add :CFBundleVersion string 0.1.2" ~/Applications/Pocketclip.app/Contents/Info.plist
 swiftc -O -swift-version 5 \
   src/main.swift src/LayoutBoxTree.swift src/AXBoxCollector.swift src/VisualBoxDetector.swift src/RegionPicker.swift src/UpdateChecker.swift \
   -framework ScreenCaptureKit -framework ApplicationServices -framework CoreML \
