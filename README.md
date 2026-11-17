@@ -6,11 +6,21 @@ Hover a layout block and click to capture, or drag to select freely. After captu
 
 ![Pocketclip editor after a capture](docs/images/screenshot.png)
 
-## Requirements
+<p align="center">
+  Free and open source. For macOS 14 and later.
+  <br>
+  <a href="https://github.com/naaadarrr/pocketclip/releases/latest">Download&nbsp;&rsaquo;</a>
+  &nbsp;&nbsp;
+  <a href="#build-from-source">Build from source&nbsp;&rsaquo;</a>
+</p>
 
-- macOS 14 Sonoma or later
-- Screen Recording permission (Accessibility is optional and enables block snapping during region capture)
-- Builds are self-signed and are not notarized. Gatekeeper may warn the first time you open the app; if macOS blocks it, right-click the app and choose Open.
+## Install
+
+Download the latest release from [Releases](https://github.com/naaadarrr/pocketclip/releases/latest) — a disk image (or zip for older versions) — open it, and drag `Pocketclip.app` to Applications.
+
+Builds are self-signed and are not notarized. The first time you open the app, macOS may warn or block it — right-click the app and choose **Open**, then confirm. After that, you can open it normally.
+
+Screen Recording permission is required. Accessibility is optional and enables block snapping during region capture.
 
 ## Shortcuts
 
@@ -22,7 +32,7 @@ Recent captures are available from the menu bar (**Command-Shift-H**) or the edi
 
 The interface language follows macOS (English or Simplified Chinese).
 
-## Build
+## Build from source
 
 From the project directory:
 
@@ -33,6 +43,8 @@ From the project directory:
 This compiles Pocketclip and installs it to `~/Applications/Pocketclip.app`.
 
 Signing uses a local keychain identity so Screen Recording permission survives rebuilds. Set the `POCKETCLIP_SIGN_PASSWORD` environment variable to unlock that keychain, or run the script in a terminal and type the password at the hidden prompt. The password is not printed.
+
+To make a disk image for a release, run `./scripts/make-dmg.sh` after building.
 
 ## License
 
